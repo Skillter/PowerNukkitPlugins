@@ -1,5 +1,5 @@
 name: powernukkit-plugin
-main: skillter.Main
+main: upodev.Main
 version: "1.0.0"
 api: ["1.0.13"]
 load: POSTWORLD
