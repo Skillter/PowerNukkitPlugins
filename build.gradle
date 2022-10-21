@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'skillter'
+version '1.0'
+
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
+    // maven { url 'https://mamoe.net:8081/repository/public/'}
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.powernukkit:powernukkit:1.6.0.1-PN'
+
+    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation 'net.formio:formio:1.6.9'
+}
+
+build {
+    doLast {
+        var fileName = "PowerNukkit-plugin-" + version + ".jar"
+        var target = "F:\\minecraft_dev_servers\\powernukkit2\\plugins"
+
+        copy {
+            from ("${buildDir}\\libs\\${fileName}")
+            into (target)
+        }
+    }
+}
