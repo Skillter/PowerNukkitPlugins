@@ -3,7 +3,7 @@ main: skillter.Main
 version: "1.0.0"
 api: ["1.0.13"]
 load: POSTWORLD
-author: Skillter
+author: Upodev
 description: A test plugin
 permissions:
   powernukkitplugin:
