@@ -1,3 +1,13 @@
+import org.apache.commons.net.ftp.FTPClient
+buildscript {
+    repositories {
+        maven { url 'https://repo1.maven.org/maven2/'}
+    }
+    dependencies {
+        classpath 'commons-net:commons-net:3.8.0'
+    }
+}
+
 plugins {
     id 'java'
 }
@@ -17,16 +27,39 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'net.formio:formio:1.6.9'
+
+
+
 }
 
 build {
     doLast {
         var fileName = "PowerNukkit-plugin-" + version + ".jar"
         var target = "F:\\minecraft_dev_servers\\powernukkit2\\plugins"
+        var targetFTP = "/home/upodev/PowerNukkit/plugins"
 
         copy {
             from ("${buildDir}\\libs\\${fileName}")
             into (target)
+        }
+
+            //def foo = System.getenv('IPAdress') ?: 'none'
+            String fileContents = new File('.//ftp credentials.txt').getText('UTF-8')
+            String ip = fileContents.readLines().get(0)
+            String user = fileContents.readLines().get(1)
+            String pass = fileContents.readLines().get(2)
+
+            def ftpClient = new FTPClient()
+            ftpClient.connect(ip)
+            ftpClient.enterLocalPassiveMode()
+            ftpClient.login(user, pass)
+            ftpClient.changeWorkingDirectory(targetFTP)
+            ftpClient.fileType=(FTPClient.BINARY_FILE_TYPE)
+            def outcomingFile = new File("${buildDir}\\libs\\${fileName}")
+            outcomingFile.withInputStream { istream ->
+                ftpClient.storeFile(fileName, istream )
+            println(ftpClient.replyString);
+            ftpClient.disconnect()
         }
     }
 }

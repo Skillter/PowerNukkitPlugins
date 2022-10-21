@@ -1,6 +1,7 @@
 .gradle
 **/build/
 !src/**/build/
+ftp credentials.txt
 
 # Ignore Gradle GUI config
 gradle-app.setting
