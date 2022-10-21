@@ -1,4 +1,4 @@
-package skillter;
+package upodev;
 
 import cn.nukkit.Nukkit;
 import cn.nukkit.Player;
