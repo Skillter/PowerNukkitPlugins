@@ -1,2 +1,3 @@
-# powernukkit-plugins
- Many powernukkit plugins made by Skillter and Pioter
+# Friends System
+
+Friends system is how it says a plugin for friends list management with a good intuitive GUI
